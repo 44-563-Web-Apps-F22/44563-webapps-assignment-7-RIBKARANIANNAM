@@ -37,14 +37,15 @@
 		<div class="cycler">row item 2</div>
 		<div class="cycler">row item 3</div>
 	</div>
+	<input type="text" id="element" >
 
 	<p> Press the button to create an new element of type div and then add it to the container.
 	</p>
 	<button onclick="makeNewDiv()">Add value</button>
-
-	<input type="text" id="element">
+	
 	<button type="button" onclick="get()">Get</button>
 	<button type="button" onclick="spin()">Spin</button>
+	<button type="button" onclick="Swap()">Swap</button>
 
 </body>
 <script>
@@ -77,6 +78,21 @@
 			container.insertBefore(removedItem,container.firstChild);
 		}
 	}
+	function Swap(){
+            let container = document.getElementById("target")
+            let cyclerItems = document.getElementsByClassName("cycler")
+            let num1=Math.floor(Math.random()*cyclerItems.length)
+            let num2=Math.floor(Math.random()*cyclerItems.length)
+            let firstnum=document.getElementsByClassName("cycler")[num1]
+            let secondnum=document.getElementsByClassName("cycler")[num2]
+            if(cyclerItems.length>1){
+                temp=firstnum.innerHTML
+                firstnum.innerHTML=secondnum.innerHTML
+                secondnum.innerHTML=temp
+
+            }
+		}  
+
 </script>
 
 </html>

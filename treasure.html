@@ -40,47 +40,37 @@
     <div class="container">
         <div class="image-row d-flex">
             <div col-sm-2>
-                <img id="r0" src="Treasure _chest.jpg" onclick="check(0)" alt="Treasure chest" height="100"
-                    width="100">
+                <img id="r0" src="Treasure _chest.jpg" onclick="check(0)" alt="Treasure chest" height="100" width="100">
             </div>
             <div col-sm-2>
-                <img id="r1" src="Treasure _chest.jpg" onclick="check(1)" alt="Treasure chest" height="100"
-                    width="100">
+                <img id="r1" src="Treasure _chest.jpg" onclick="check(1)" alt="Treasure chest" height="100" width="100">
             </div>
             <div col-sm-2>
-                <img id="r2" src="Treasure _chest.jpg" onclick="check(2)" alt="Treasure chest" height="100"
-                    width="100">
+                <img id="r2" src="Treasure _chest.jpg" onclick="check(2)" alt="Treasure chest" height="100" width="100">
             </div>
             <div col-sm-2>
-                <img id="r3" src="Treasure _chest.jpg" onclick="check(3)" alt="Treasure chest" height="100"
-                    width="100">
+                <img id="r3" src="Treasure _chest.jpg" onclick="check(3)" alt="Treasure chest" height="100" width="100">
             </div>
             <div col-sm-2>
-                <img id="r4" src="Treasure _chest.jpg" onclick="check(4)" alt="Treasure chest" height="100"
-                    width="100">
+                <img id="r4" src="Treasure _chest.jpg" onclick="check(4)" alt="Treasure chest" height="100" width="100">
             </div>
         </div>
 
         <div class="image-row d-flex">
             <div col-sm-2>
-                <img id="r5" src="Treasure _chest.jpg" onclick="check(5)" alt="Treasure chest" height="100"
-                    width="100">
+                <img id="r5" src="Treasure _chest.jpg" onclick="check(5)" alt="Treasure chest" height="100" width="100">
             </div>
             <div col-sm-2>
-                <img id="r6" src="Treasure _chest.jpg" onclick="check(6)" alt="Treasure chest" height="100"
-                    width="100">
+                <img id="r6" src="Treasure _chest.jpg" onclick="check(6)" alt="Treasure chest" height="100" width="100">
             </div>
             <div col-sm-2>
-                <img id="r7" src="Treasure _chest.jpg" onclick="check(7)" alt="Treasure chest" height="100"
-                    width="100">
+                <img id="r7" src="Treasure _chest.jpg" onclick="check(7)" alt="Treasure chest" height="100" width="100">
             </div>
             <div col-sm-2>
-                <img id="r8" src="Treasure _chest.jpg" onclick="check(8)" alt="Treasure chest" height="100"
-                    width="100">
+                <img id="r8" src="Treasure _chest.jpg" onclick="check(8)" alt="Treasure chest" height="100" width="100">
             </div>
             <div col-sm-2>
-                <img id="r9" src="Treasure _chest.jpg" onclick="check(9)" alt="Treasure chest" height="100"
-                    width="100">
+                <img id="r9" src="Treasure _chest.jpg" onclick="check(9)" alt="Treasure chest" height="100" width="100">
             </div>
         </div>
         <div class="image-row d-flex">
@@ -150,79 +140,69 @@
         </div>
 
         <script>
-            var id = [   "r0", "r1", "r2", "r3", "r4", "r5", "r6", "r7", "r8", "r9", "r10", "r11", "r12", "r13", "r14", "r15", "r16", "r17", "r18", "r19", "r20", "r21", "r22", "r23", "r24"   ]
+            var id = ["r0", "r1", "r2", "r3", "r4", "r5", "r6", "r7", "r8", "r9", "r10", "r11", "r12", "r13", "r14", "r15", 
+                       "r16", "r17", "r18", "r19", "r20", "r21", "r22", "r23", "r24"]
             let chestCount = 0
             let score = 0
             let lastCheck = 12
-            let treasureLocation = 18
+            let treasureLocation = Math.floor(Math.random()*24)
 
-            function check(position){
-            var imageId = id[position];
-            if(position == treasureLocation){ 
-                document.getElementById(imageId).src = "treasure.jpg";
+            function check(position) {
+            image = document.getElementById(id[position])
+            if (position == treasureLocation) {
+                image.src = "treasure.jpg"
             }
-            else{
-                document.getElementById(imageId).src="emoj_sad_face.jpg";
+            else {
+                image.src = "emoj_sad_face.jpg"
             }
-            chestCount = chestCount + 1;
-            score = score + 1;
-            document.getElementById("chests").innerHTML = "Number of chests checked is "+chestCount;
-            document.getElementById("score").innerHTML = "Score is "+score;
-            lastCheck = position;
+            chestCount = chestCount + 1
+            score = score + 1
+            document.getElementById("chests").innerHTML = "Number of chests checked is " + chestCount
+            document.getElementById("score").innerHTML = "Score is  " + score
+            lastCheck = position
+        }
+
+        function help() {
+           let lastCheckrow =parseInt(lastCheck / 5)
+            let lastCheckcol = parseInt(lastCheck % 5)
+            let treasureLocationrow =parseInt (treasureLocation/5)
+            let treasureLocationcol =parseInt(treasureLocation%5)
+            score = score + 2
+            console.log(treasureLocation,treasureLocationcol,treasureLocationrow,lastCheckcol,lastCheckrow)
+            document.getElementById("score").innerHTML = "Score is" + score
+            if(lastCheck==treasureLocation){
+                document.getElementById("help").innerHTML = "sorry, no help available"
             }
-            function help(){
+            if (lastCheckrow == treasureLocationrow) {
+                if (lastCheckcol < treasureLocationcol) {
+                    document.getElementById("help").innerHTML = "left"
+                }
+                else if(lastCheckcol > treasureLocationcol) {
+                    document.getElementById("help").innerHTML = "right"
+                }
+            
 
-            let columnlast = lastCheck % 5;
+            }
+            else if (lastCheckcol == treasureLocationcol) {
+                if (lastCheckrow < treasureLocationrow) {
+                    document.getElementById("help").innerHTML = "Down"
+                }
+                else if (lastCheckrow > treasureLocationrow) {
+                    document.getElementById("help").innerHTML = "Up"
+                }
 
-            let rowlast = Math.floor(lastCheck / 5 );
+            }
+            else {
+                document.getElementById("help").innerHTML = "sorry, no help available"
+            }
+            if(lastCheck== treasureLocation){
 
-           let treasureColumn = treasureLocation % 5;
-
-           let treasureRow = Math.floor(treasureLocation / 5);
-
-           score = score + 2;
-
-             document.getElementById("score").innerHTML = "Score is "+score;
-
-          if(treasureRow == rowlast){
-
-           if(columnlast < treasureColumn){
-
-        document.getElementById("help").innerHTML = "right";
-
-          }
-
-         else if(columnlast > treasureColumn){
-
-        document.getElementById("help").innerHTML = "left";
-
-          }
-
-           else{
-
-        document.getElementById("help").innerHTML = "Sorry, no help available" ;
+            document.getElementById("help").innerHTML = "You, already won the game" ;
 
          }
 
-           }
-
-        else if(treasureColumn == columnlast){
-         if(rowlast < treasureRow){ 
-        document.getElementById("help").innerHTML = "down"
         }
-        else if(rowlast > treasureRow){
-         document.getElementById("help").innerHTML = "up";
-        }
-        else{
-          document.getElementById("help").innerHTML = "Sorry, no help available" 
-         }
-        }
-         if(lastCheck == treasureLocation){
-         document.getElementById("help").innerHTML = "You, already won the game" ;
-         }
-        }
-         </script>
+    </script>
 </body>
 
 </html>
-

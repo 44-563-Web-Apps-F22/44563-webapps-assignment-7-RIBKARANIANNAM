@@ -11,7 +11,7 @@
 </head>
 <body>
 
-  <h2>Ribkarani Annam reaction timer</h2>
+  <h1>Ribkarani Annam reaction timer</h1>
 
 
 
@@ -23,8 +23,8 @@
     <div id="countdown">Count</div>
 </p>
 
-<button type="button"  onclick="startTime()">Start Timer</button>
-<button type="button" onclick="recordReact()">React Now</button>
+<button type="button"   class="btn btn-primary" onclick="startTime()">Start Timer</button>
+<button type="button"  class="btn btn-primary" onclick="recordReact()">React Now</button>
 
 <script> 
 
@@ -38,8 +38,9 @@
     console.log(myTime)
   }
   function startTime(){
+     var startCount=Math.floor(Math.random()*8)+2
       for(let i = 0; i < 4; i++){
-        setTimeout(()=>{document.getElementById("countdown").innerHTML=i},(3-i)*1000);
+        setTimeout(()=>{document.getElementById("countdown").innerHTML= "count" +i},(3-i)*1000);
       }
 
       setTimeout(function(){
